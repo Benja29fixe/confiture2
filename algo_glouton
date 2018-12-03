@@ -1,0 +1,8 @@
+def algo_glouton(S,X):
+    if X==0:
+        return 0
+    else:
+        i = 0
+        while (i<len(S)) and (S[i]<=X):
+            i+=1
+        return 1 + algo_glouton(S,X-S[i-1])
