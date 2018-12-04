@@ -1,0 +1,18 @@
+#!/bin/bash
+
+i=0
+while [ $i -lt 21 ]
+do
+    echo 'fit y'$i'=a'$i'*x**2+b'$i'*x+c'$i' "algo_dyn_d2_'$i'.temps" using 1:3 via a'$i',b'$i',c'$i'' >> script_dyn.gnu
+    
+    i=$((i+4))
+    done
+
+i=0
+while [ $i -lt 21 ]
+do
+    echo '"algo_dyn_d2_'$i'.temps" using 1:3, a'$i'*x**2+b'$i'*x+c'$i' title k='$i',\' >> script_dyn.gnu
+
+    i=$((i+4))
+
+    done

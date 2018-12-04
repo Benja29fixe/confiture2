@@ -1,15 +1,11 @@
 #!/bin/bash
 
-
-make
-
 a=0
 
-while [ $a -lt 30 ]
+while [ $((4**a)) -lt $1 ]
 do
-    ./script_remplissage 30 $a 
-
-    
+    ./script_remplissage $1 $a 
+   
     ./main fic2 
 
     a=$((a+1))

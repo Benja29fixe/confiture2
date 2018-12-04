@@ -1,0 +1,10 @@
+#!/bin/bash
+
+i=0
+while [ $i -lt 5 ]
+do
+    sed -n "/ $i /p" ./algo_exhaustif_d4.temps > ./algo_exhaustif_d4/algo_exhaustif_d4_$i.temps
+    
+i=$((i+1))
+done
+

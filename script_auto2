@@ -1,0 +1,11 @@
+#!/bin/bash
+
+i=0
+
+while [ $i -lt 100 ]
+do
+    ./script_auto $i
+
+    i=$((i+1))
+
+done

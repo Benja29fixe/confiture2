@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+# include <time.h>
 #include "fonctions.h"
 
 int main(int argc ,char** argv){
@@ -13,6 +14,11 @@ int main(int argc ,char** argv){
   char *nomfic;
   Donnees D;
   initialise(&D);
+
+  clock_t temps_initial;
+  clock_t temps_final;
+  double temps_cpu;
+  FILE *f1, *f2, *f3;
 
   if(argc !=2){
     printf("Erreur format: %s  <Nom_du_Fichier.txt> ",argv[0]);
@@ -34,7 +40,7 @@ int main(int argc ,char** argv){
   for(i=0; i<D.L->nb_bocaux; i++){
     printf("valeur du pot %d : %d\n", i, D.L->tab[i]);
   }
-
+  /*
   do{
     printf("\n\n===========================================================\n");
     printf("0 : QUITTER\n");
@@ -46,43 +52,87 @@ int main(int argc ,char** argv){
     printf("===========================================================\n");
 
   
-    switch(ch){
+/*     switch(ch){ */
 
-    case 0:
-      break;
+/*     case 0: */
+/*       break; */
       
-    case 1:
+/*     case 1: */
+/*******************************/
+      f1=fopen("./temps/algo_exhaustif_d4.temps", "a");
+      /*******************************/
+
             printf("\n-----------------------\n");
       printf("1/ Algorithme exhaustif");
             printf("\n-----------------------");
+	     /*******************************/
+      temps_initial=clock();
+      /*******************************/
       printf("SOLUTION: Nombre minimum de bocaux necessaires pour %d g de confiture: %d \n",D.L->quantite_conf, recherche_exhaustive(D.L->nb_bocaux, D.L->tab, D.L->quantite_conf));
+ /*******************************/
+      temps_final=clock();
+      temps_cpu =((double)(temps_final-temps_initial))/ CLOCKS_PER_SEC;
+      fprintf(f1, "%d %d %f\n", D.L->quantite_conf, D.L->nb_bocaux, temps_cpu);
+      fclose(f1);
+      /*******************************/
+  
+/*       break; */
+  
+/*         case 2: */
+  
+   /* /\*******************************\/ */
+   /*    f2=fopen("./temps/algo_dynamique_d4.temps", "a"); */
+   /*    /\*******************************\/ */
+   /*          printf("\n-----------------------\n"); */
+   /*    printf("2/ Algorithme programmation dynamique"); */
+   /*          printf("\n-----------------------\n"); */
+   /* 	     /\*******************************\/ */
+   /*    temps_initial=clock(); */
+   /*    /\*******************************\/ */
+   /*    printf("SOLUTION: Nombre minimum de bocaux necessaires pour %d g de confiture: %d \n",D.L->quantite_conf, algo_dynamique(D.L->nb_bocaux, D.L->tab, D.L->quantite_conf)); */
+   /*    /\*******************************\/ */
+   /*    temps_final=clock(); */
+   /*    temps_cpu =((double)(temps_final-temps_initial))/ CLOCKS_PER_SEC; */
+   /*    fprintf(f2, "%d %d %f\n", D.L->quantite_conf, D.L->nb_bocaux, temps_cpu); */
+   /*    fclose(f2); */
+      /*******************************/
+      /*
       break;
+      
+/*     case 3: */
+/*******************************/
+  /*     f3=fopen("./temps/algo_glouton_d4.temps", "a"); */
+/*       /\*******************************\/ */
+/*       printf("\n-----------------------\n"); */
+/*       printf("3/ Algorithme glouton"); */
+/*            printf("\n-----------------------\n"); */
+/* 	    /\*******************************\/ */
+/*       temps_initial=clock(); */
+/*       /\*******************************\/ */
+/*       printf("SOLUTION: Nombre minimum de bocaux necessaires pour %d g de confiture: %d \n",D.L->quantite_conf, algo_glouton(D.L->nb_bocaux, D.L->tab, D.L->quantite_conf)); */
+/* /\*******************************\/ */
+/*       temps_final=clock(); */
+/*       temps_cpu =((double)(temps_final-temps_initial))/ CLOCKS_PER_SEC; */
+/*       fprintf(f3, "%d %d %f\n", D.L->quantite_conf, D.L->nb_bocaux, temps_cpu); */
+/*       fclose(f3); */
+      /*******************************/
 
-    case 2:
-            printf("\n-----------------------\n");
-      printf("2/ Algorithme programmation dynamique");
-            printf("\n-----------------------\n");
-      printf("SOLUTION: Nombre minimum de bocaux necessaires pour %d g de confiture: %d \n",D.L->quantite_conf, algo_dynamique(D.L->nb_bocaux, D.L->tab, D.L->quantite_conf));
-      break;
 
-    case 3:
-      printf("\n-----------------------\n");
-      printf("3/ Algorithme glouton");
-           printf("\n-----------------------\n");
-      printf("SOLUTION: Nombre minimum de bocaux necessaires pour %d g de confiture: %d \n",D.L->quantite_conf, algo_glouton(D.L->nb_bocaux, D.L->tab, D.L->quantite_conf));
-      break;
 
-          default:
-      printf("ATTENTION!! \nVous devez choisir un nombre entre 0 et 3.\n");
+      
+/*       break; */
+
+/*           default: */
+/*       printf("ATTENTION!! \nVous devez choisir un nombre entre 0 et 3.\n"); */
 
       
 
-    }
-    }while(ch!=0);
+/*     } */
+/*     }while(ch!=0); */
 
-    printf("\n\nFIN\n\n");
+/*     printf("\n\nFIN\n\n"); */
 
-  
+      
 
 }
 
